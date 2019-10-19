@@ -24,7 +24,7 @@ function view (arrayToDisplay) {
         li.className = "li_list";
         const check = document.createElement("input");
         check.type = "checkbox";
-        check.setAttribute("data-id", index);
+        check.setAttribute("data-id", todoList.indexOf(item));
         check.id = 'right-'+index;
         check.className = "check";
         const newLabel = document.createElement("Label");
@@ -45,7 +45,7 @@ function view (arrayToDisplay) {
         btn.addEventListener("click" , deleteSubmit);
         btn.innerText = "x";
         btn.className = "btn del";
-        btn.setAttribute("data-id", index);
+        btn.setAttribute("data-id", item.id);
         if (item.isDone == true ){
             img.style.opacity = "1";
             imgContainer.style.border = "none";
@@ -70,7 +70,7 @@ function view (arrayToDisplay) {
 function handleSubmit (event){
     console.log(event.target.value);
     if (event.keyCode === 13 && event.target.value.trim() != "") {
-        const todoText = {text: '', isDone: false};
+        const todoText = {text: '', isDone: false , id:""};
         todoText.text = input.value;
         todoList.push(todoText);
         console.log(todoList);
@@ -84,10 +84,10 @@ function handleSubmit (event){
 }    
     function deleteSubmit (event) {
         console.log('inside delete',event)
-        var index = event.target.dataset.id
+        var id = event.target.dataset.id
         // if(event.target.classList.contains("del")){
             console.log('inside delete if')
-        todoList.splice(index,1);
+        todoList.splice(id,1);
         // }
         view(todoList);
 
@@ -97,10 +97,17 @@ function handleSubmit (event){
     function handleCheck (event) {
         console.log("handle check",event);
         var id = event.target.dataset.id
-        todoList[id].isDone = !todoList[id].isDone;
-        view(todoList)
-
+        if (event.target.classList.contains('check')){
+        //    todoList.forEach(item => { 
+        //     if (item.id != id){ 
+           todoList[id].isDone = !todoList[id].isDone;
+        //    }
+        // })
+    }
+    view(todoList);
 }
+       
+
     function completed () {
         console.log('inside complete')
         const isChecked = todoList.filter((item) => {

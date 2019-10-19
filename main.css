@@ -177,14 +177,14 @@ body {
     width:3%;
     position: absolute;
     left:1rem;
-    top:1.4rem;
+    top:26px;
     display: none;
 }
 .i_ {
     width:3%;
     position: absolute;
     left:1rem;
-    top:1.5rem;
+    top:26px;
     display: inline-block;
 }
 
@@ -288,4 +288,16 @@ h3 {
     padding: 3rem 0;
     cursor: pointer;
    
+}
+
+@media screen and (max-width:768px){
+    html {
+        font-size: 10px;
+    }
+    .container{
+        width:90%;
+    }
+    .item,.all1,.completed,.active,.clear_completed,.item_count{
+        margin:0 0.4rem;
+    }
 }
